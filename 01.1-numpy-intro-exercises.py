@@ -107,3 +107,78 @@ print(centered_array)
 column_stds = np.std(random_array, axis=0)
 normalized_array = random_array / column_stds
 print(normalized_array)
+
+# Image manipulation
+
+# 1. Create a 10x10 "image" of zeros
+image = np.zeros((10, 10))
+
+# 2. Set the middle 6x6 area to 1 (creating a square)
+image[2:8, 2:8] = 1
+
+# 3. Add a border of 2s around the square (hint: careful indexing)
+# First, set the outer border (top, bottom, left, right)
+image[1, 1:9] = 2  # Top border
+image[8, 1:9] = 2  # Bottom border
+image[1:9, 1] = 2  # Left border
+image[1:9, 8] = 2  # Right border
+
+# 4. Rotate the image by 90 degrees
+np.rot90(image)
+
+# 5. Flip the image horizontally
+np.flip(image)
+
+# Conditionals operations
+
+# 1. Create an array of 10 random integers between 0 and 100
+random_integers = np.random.randint(0, 101, 10)
+print(random_integers)
+
+# 2. Create a mask that identifies all prime numbers in the array
+mask = np.array([all(num % i != 0 for i in range(2, int(num**0.5) + 1)) and num > 1 for num in random_integers])
+prime_random_integers = random_integers[mask]
+print(prime_random_integers)
+
+# 3. Replace all even numbers with -1
+even_mask = random_integers % 2 == 0
+random_integers[even_mask] = -1  # Using even_mask instead of mask
+print(random_integers)
+
+# 4. Find the indices of the three largest values
+# Hint: You can use np.argsort() to get the indices that would sort an array,
+# then use negative indexing to get the indices of the largest values.
+# For example: indices = np.argsort(array)[-3:]
+indices = np.argsort(random_integers)[-3:]
+print(indices)
+
+# 5. Count how many values are above the mean
+mean = np.mean(random_integers)
+print(mean)
+mean_mask = random_integers > mean
+above_mean = len(random_integers[mean_mask])
+print(above_mean)
+
+# Array reshaping
+
+# 1. Create a 1D array with 24 elements
+one_d_array = np.array(range(1, 25))
+print(one_d_array)
+
+# 2. Reshape it into a 2D array with 6 rows and 4 columns
+two_d_array = np.reshape(one_d_array, (6, 4))
+print(two_d_array)
+
+# 3. Reshape it into a 3D array with 2 layers, 3 rows, and 4 columns
+three_d_array = np.reshape(one_d_array, (2, 3, 4))
+print(three_d_array)
+
+# 4. Transpose your 2D array
+# Transposing a 2D array means swapping rows and columns
+# For example, if you have a 6x4 array, transposing it will give you a 4x6 array
+transposed_array = np.transpose(two_d_array)
+print(transposed_array)
+
+# 5. Reverse the order of elements in each row
+reversed_rows = two_d_array[:, ::-1]
+print(reversed_rows)
